@@ -20,6 +20,7 @@ const pool = new Pool({
  ssl: process.env.PGSSL === 'disable' ? false : { rejectUnauthorized: false }
 });
 const app = express();
+app.set('trust proxy', 1);
 app.use(helmet({contentSecurityPolicy:false}));
 app.use(express.json({limit:'100kb'}));
 app.use('/api/auth', rateLimit({windowMs:15*60*1000,limit:30,standardHeaders:true,legacyHeaders:false}));
